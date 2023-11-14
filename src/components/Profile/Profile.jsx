@@ -1,8 +1,8 @@
 import { Col } from "react-bootstrap";
+import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import styles from "./styles.module.scss";
-export default function Profile() {
+export default function Profile(profile, setProfile) {
   return (
     <Card className="rounded-3 me-4 mb-2">
       <div
@@ -25,24 +25,14 @@ export default function Profile() {
       ></div>
       <Card.Body className="d-flex flex-row p-4">
         <Col>
-          <Card.Title>
-            <h4 className="fw-bolder mt-5">Mario Rossi</h4>
+          <Card.Title className="d-flex flex-row">
+            <h4 className="fw-bolder mt-5 me-2">{profile.name}</h4>
+            <h4 className="fw-bolder mt-5">{profile.surname}</h4>
           </Card.Title>
-          <Card.Subtitle>
-            Associate Professor - Università di Pisa
-          </Card.Subtitle>
+          <Card.Subtitle>{profile.title} - Università di Pisa</Card.Subtitle>
           <Card.Text className="fs-6  text-secondary mt-2 ">
             Firenze, Toscana, Italia
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-dot"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z" />
-            </svg>
+            <Dot />
             <Card.Link className="fw-bolder text-decoration-none ">
               Informazioni di contatto
             </Card.Link>
@@ -55,21 +45,7 @@ export default function Profile() {
               className="fw-bold rounded-3 rounded-pill  me-2"
               variant="primary"
             >
-              <svg
-                className="me-2"
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-person-plus-fill"
-                viewBox="0 0 16 16"
-              >
-                <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                <path
-                  fill-rule="evenodd"
-                  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
-                />
-              </svg>
+              <PersonPlusFill />
               Collegati
             </Button>
             <Button
