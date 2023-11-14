@@ -1,13 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import Main from './components/Main';
-import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
+import { Container } from'react-bootstrap';
 function App() {
   return (
     <>
-    <NavBar />
+    <Container className="mt-5">
 
-    <Main/>
+<Main/>
+<Footer/>
+    </Container>
     </>
   );
 }
