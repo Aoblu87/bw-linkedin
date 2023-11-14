@@ -1,53 +1,59 @@
 import styles from './styles.module.scss'
-import {Container} from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import { Linkedin, HouseDoorFill, PeopleFill } from 'react-bootstrap-icons';
+import { Linkedin, HouseDoorFill, PeopleFill, BriefcaseFill, ChatDotsFill, BellFill, PersonCircle, Grid3x3GapFill, CaretDownFill } from 'react-bootstrap-icons';
 import cn from "classnames";
 
 
 
 function NavBar() {
   return (
-    <Navbar fixed="top" expand="lg" className="bg-body-tertiary">
+    <Navbar fixed="top" expand="lg" className="bg-body-tertiary p-0">
       <Container>
-        <Navbar.Brand href="#"><Linkedin className={cn (styles.card)}/></Navbar.Brand>
+
+        <Navbar.Brand href="#"><Linkedin className="text-primary fs-2 ms-5" /></Navbar.Brand>
         <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-          </Form>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="mx-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            <Nav.Link href="#action1" className='d-flex flex-column align-items-center'><HouseDoorFill className={cn (styles.card)} /><h6>Home</h6></Nav.Link>
-            <Nav.Link href="#action2" className='d-flex flex-column align-items-center'><PeopleFill className={cn (styles.card)} /><h6>Rete</h6></Nav.Link>
-            <Nav.Link href="#action3" className='d-flex flex-column align-items-center'><HouseDoorFill className={cn (styles.card)} /><h6>Home</h6></Nav.Link>
-            <Nav.Link href="#action4" className='d-flex flex-column align-items-center'><HouseDoorFill className={cn (styles.card)} /><h6>Home</h6></Nav.Link>
-            <Nav.Link href="#action5" className='d-flex flex-column align-items-center'><HouseDoorFill className={cn (styles.card)} /><h6>Home</h6></Nav.Link>
-            <NavDropdown title="Link" id="navbarScrollingDropdown">
-              <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action4">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action5">
-                Something else here
-              </NavDropdown.Item>
-            </NavDropdown>
+          <Form.Control
+            type="search"
+            placeholder="Cerca"
+            className="me-2"
+            aria-label="Search"
+          />
+        </Form>
+        
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mx-auto  my-lg-0">
             
+            <Container className='col-lg-12' id='icone' style={{ borderRight: '1px solid rgb(119, 119, 119)' }}>
+              <Row className='d-flex flex-row  justify-content-between'>
+              <Nav.Link href="#action1" className='d-flex flex-column align-items-center col-lg-2'><HouseDoorFill className='fs-5' /><h6>Home</h6></Nav.Link>
+              <Nav.Link href="#action2" className='d-flex flex-column align-items-center col-lg-2'><PeopleFill className='fs-5' /><h6>Rete</h6></Nav.Link>
+              <Nav.Link href="#action3" className='d-flex flex-column align-items-center col-lg-2'><BriefcaseFill className='fs-5' /><h6>Lavoro</h6></Nav.Link>
+              <Nav.Link href="#action4" className='d-flex flex-column align-items-center col-lg-2'><ChatDotsFill className='fs-5' /><h6>Messaggistica</h6></Nav.Link>
+              <Nav.Link href="#action5" className='d-flex flex-column align-items-center col-lg-2'><BellFill className='fs-5' /><h6>Notifiche</h6></Nav.Link>
+              <Nav.Link href="#action6" className='d-flex flex-column align-items-center col-lg-2'><PersonCircle className='fs-5' />
+                <Container className='d-flex flex-row'>
+                  <h6>Tu</h6>
+                  <CaretDownFill className='fs-6'/>
+                </Container>
+              </Nav.Link>
+              </Row>
+            </Container>
+            <Nav.Link href="#action7" className='d-flex flex-column align-items-center col-lg-3'><Grid3x3GapFill className='fs-5' />
+              <Container className='d-flex flex-row'>
+                <h6 style={{ fontSize: '10px' }} >Per le aziende</h6>
+                <CaretDownFill className='fs-6' />
+              </Container>
+            </Nav.Link>
+
+
           </Nav>
-          
+
         </Navbar.Collapse>
+     
       </Container>
     </Navbar>
   );
