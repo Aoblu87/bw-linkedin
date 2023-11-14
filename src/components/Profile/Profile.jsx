@@ -1,10 +1,10 @@
 import { Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-
+import styles from "./styles.module.scss";
 export default function Profile() {
   return (
-    <Card className="col-8 rounded-3 me-4">
+    <Card className="rounded-3 me-4 mb-2">
       <div
         className="rounded-top  position-relative"
         style={{
