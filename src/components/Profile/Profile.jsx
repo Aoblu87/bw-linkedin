@@ -46,7 +46,7 @@ export default function Profile() {
             </Card.Title>
             <Card.Subtitle>{profile?.title} - Università di Pisa</Card.Subtitle>
             <Card.Text className="fs-6  text-secondary mt-2 ">
-              Firenze, Toscana, Italia
+              {profile?.area}
               <Dot />
               <Card.Link className="fw-bolder text-decoration-none ">
                 Informazioni di contatto
@@ -84,7 +84,15 @@ export default function Profile() {
           </Col>
         </Card.Body>
       </Card>
-      {profile && <Experience profile={profile} />}
+
+      <Card className="rounded-3 me-4 mb-2">      
+      <Card.Body>
+        <Card.Title><h4 className="fw-bolder mt-2">Esperienza</h4></Card.Title>
+        {profile && <Experience profile={profile} />}
+      </Card.Body>
+    </Card>
+      
+      
     </>
   );
 }

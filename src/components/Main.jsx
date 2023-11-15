@@ -11,8 +11,11 @@ export default function Main() {
       </Col>
       {/* al posto del codice che ho messo qui sotto puoi aggiungere il componente con un file jsx a parte per la sidebar*/}
       <Card className="col-3 justify-content-center">
-      <h5 className="mt-2 ms-4 ">Altri profili consultati</h5>
+        <h5 className="mt-4 ms-4 ">Persone che potresti conoscere</h5>
         <Sidebar />
+        <hr />
+        <h5 className="text-muted align-self-center">Mostra tutto</h5>
+
       </Card>
     </Row>
   );
