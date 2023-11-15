@@ -13,13 +13,8 @@ import {
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-<<<<<<< Updated upstream
 import styles from "./styles.module.scss";
 import cn from "classnames";
-=======
-import styles from "./styles.module.scss"
-import cn from "classnames"
->>>>>>> Stashed changes
 
 function MyNavbar() {
   return (
