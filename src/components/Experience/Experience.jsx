@@ -17,6 +17,13 @@ export default function Experience({ profile }) {
       .then((r) => r.json())
       .then(setExperiences);
   }, [profile._id]);
+
+  // "role":"Nanny",
+  // "company":"WC",
+  // "startDate":"2020/11/11",
+  // "endDate":"2020/12/01",
+  // "description":"Doing stuff",
+  // "area":"Dublin",
   return experiences?.map((experience) => (
     <Card className="rounded-3 me-4 mb-2" key={experience._id}>
       <Card.Body className="d-flex flex-column ">
@@ -36,7 +43,7 @@ export default function Experience({ profile }) {
           </Figure>
           <Col>
             <Card.Subtitle>
-              {experience.username} - Università di Pisa
+              <h5>{experience.role}</h5>
             </Card.Subtitle>
             <Card.Subtitle>
               {experience.role} - Università di Pisa
