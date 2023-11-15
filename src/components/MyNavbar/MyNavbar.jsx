@@ -17,7 +17,11 @@ import styles from "./styles.module.scss"
 
 function MyNavbar() {
   return (
-    <Navbar fixed="top" expand="lg" className="bg-body-tertiary p-0">
+    <Navbar
+      fixed="top"
+      expand="lg"
+      className={("bg-body-tertiary p-0", styles.prova)}
+    >
       <Container>
         <Navbar.Brand href="#">
           <Linkedin className="text-primary fs-2 ms-5" />

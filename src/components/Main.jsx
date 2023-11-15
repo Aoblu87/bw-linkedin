@@ -1,6 +1,5 @@
 import { Col, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import Experience from "./Experience/Experience";
 import Profile from "./Profile/Profile";
 import Sidebar from "./Sidebar/Sidebar";
 
@@ -9,7 +8,6 @@ export default function Main() {
     <Row className="g-0 p-5">
       <Col className="col-md-8 d-flex flex-column">
         <Profile />
-        <Experience />
       </Col>
       {/* al posto del codice che ho messo qui sotto puoi aggiungere il componente con un file jsx a parte per la sidebar*/}
       <Card className="col-3 justify-content-center">
