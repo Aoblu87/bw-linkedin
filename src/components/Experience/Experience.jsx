@@ -17,6 +17,7 @@ export default function Experience({ profile }) {
       .then((r) => r.json())
       .then(setExperiences);
   }, [profile._id]);
+<<<<<<< Updated upstream
 
   // "role":"Nanny",
   // "company":"WC",
@@ -24,6 +25,9 @@ export default function Experience({ profile }) {
   // "endDate":"2020/12/01",
   // "description":"Doing stuff",
   // "area":"Dublin",
+=======
+  
+>>>>>>> Stashed changes
   return experiences?.map((experience) => (
     <Card className="rounded-3 me-4 mb-2" key={experience._id}>
       <Card.Body className="d-flex flex-column ">
