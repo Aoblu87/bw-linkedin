@@ -8,7 +8,7 @@ export default function Sidebar() {
       fetch("https://striveschool-api.herokuapp.com/api/profile/", {
         method: 'GET',
         headers: {
-          Authorization: "process.env.REACT_APP_MY_TOKEN",
+          Authorization: process.env.REACT_APP_MY_TOKEN,
         },
       })
         .then((r) => r.json())
@@ -16,7 +16,7 @@ export default function Sidebar() {
     }, []);
 
     return (
-        
+        profile.map(() =>
             <Card className="col-3">
         <Card.Img variant="top" src={profile.image} />
         <Card.Body>
@@ -28,7 +28,7 @@ export default function Sidebar() {
           <Button variant="primary">Go somewhere</Button>
         </Card.Body>
       </Card>
-
+)
         )
         }
         
