@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Figure, Row } from "react-bootstrap";
 import { Dot } from "react-bootstrap-icons";
-import logo from "../../assets/logo.png";
 import logoWork from "../../assets/logo-workexperience.png";
 import styles from "./styles.module.scss";
 import cn from "classnames";
