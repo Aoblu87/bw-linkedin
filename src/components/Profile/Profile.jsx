@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
 import { Col } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-export default function Profile(profile, setProfile) {
+export default function Profile() {
+  const [profile, setProfile] = useState([]);
+  useEffect(() => {
+    fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
+      headers: {
+        Authorization: process.env.REACT_APP_MY_TOKEN,
+      },
+    })
+      .then((r) => r.json())
+      .then(setProfile);
+  }, []);
   return (
     <Card className="rounded-3 me-4 mb-2">
       <div
