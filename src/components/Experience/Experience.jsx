@@ -1,8 +1,3 @@
-import { useEffect, useState } from "react";
-import { Col, Figure, Row } from "react-bootstrap";
-import { Dot } from "react-bootstrap-icons";
-import Card from "react-bootstrap/Card";
-
 export default function Experience(profile, setProfile) {
   return null;
   // const [experience, setExperience] = useState([]);
