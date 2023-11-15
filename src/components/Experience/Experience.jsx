@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Figure, Row } from "react-bootstrap";
 import { Dot } from "react-bootstrap-icons";
-import logo from './logo.png';
+import logo from "../../assets/logo.png";
+import logoWork from "../../assets/logo-workexperience.png";
+import styles from "./styles.module.scss";
+import cn from "classnames";
 
 export default function Experience({ profile }) {
   const [experiences, setExperiences] = useState();
@@ -36,12 +39,12 @@ export default function Experience({ profile }) {
           </Card.Title>
         </Row>
         <Row>
-          <Figure className="col-2">
+          <Figure className={cn("col-2", styles.imgBox)}>
             <Figure.Image
               width={171}
               height={180}
               alt="171x180"
-              src={logo}
+              src={logoWork}
             />
           </Figure>
           <Col>
