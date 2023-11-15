@@ -42,9 +42,8 @@ export default function Experience({ profile }) {
             />
           </Figure>
           <Col>
-            <Card.Subtitle>
-              <h5>{experience.role}</h5>
-            </Card.Subtitle>
+            <h4 className="fw-bolder">{experience.role}</h4>
+
             <Card.Subtitle>
               {experience.role} - Università di Pisa
             </Card.Subtitle>

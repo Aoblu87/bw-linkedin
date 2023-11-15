@@ -13,14 +13,15 @@ import {
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import styles from "./styles.module.scss"
+import styles from "./styles.module.scss";
+import cn from "classnames";
 
 function MyNavbar() {
   return (
     <Navbar
       fixed="top"
       expand="lg"
-      className={("bg-body-tertiary p-0", styles.prova)}
+      className={cn("bg-body-tertiary p-0", styles.prova)}
     >
       <Container>
         <Navbar.Brand href="#">
