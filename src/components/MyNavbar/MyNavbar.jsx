@@ -13,6 +13,7 @@ import {
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import styles from "./styles.module.scss"
 
 function MyNavbar() {
   return (
@@ -92,7 +93,7 @@ function MyNavbar() {
             >
               <Grid3x3GapFill className="fs-5" />
               <Container className="d-flex flex-row">
-                <h6 style={{ fontSize: "10px" }}>Per le aziende</h6>
+                <h6 style={{ fontSize: "8px" }}>Per le aziende</h6>
                 <CaretDownFill className="fs-6" />
               </Container>
             </Nav.Link>
