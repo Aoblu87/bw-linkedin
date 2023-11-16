@@ -11,40 +11,25 @@ export default function Profile() {
   const [profile, setProfile] = useState();
   const { id } = useParams();
 
-  // useEffect(() => {
-  //   // setLoading(true);
-  //   fetch("https://striveschool-api.herokuapp.com/api/profile/" + id, {
-  //     headers: {
-  //       Authorization: process.env.REACT_APP_MY_TOKEN,
-  //     },
-  //   })
-  //     .then((r) => {
-  //       if (!r.ok) throw new Error("Errore nella richiesta");
-  //       return r.json();
-  //     })
-  //     .then(setProfile);
-  //   //  .then(() => {
-  //   //  setError(null);
-  //   // })
-  //   // .catch(error);
-  //   // .finally(() => {
-  //   //   setLoading(false);
-  //   // });
-  // }, [id]);
-
   useEffect(() => {
-    try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
-        headers: {
-          Authorization: process.env.REACT_APP_MY_TOKEN,
-        },
+    // setLoading(true);
+    fetch("https://striveschool-api.herokuapp.com/api/profile/" + id, {
+      headers: {
+        Authorization: process.env.REACT_APP_MY_TOKEN,
+      },
+    })
+      .then((r) => {
+        if (!r.ok) throw new Error("Errore nella richiesta");
+        return r.json();
       })
-        .then((r) => r.json())
-        .then(setProfile);
-      console.log(setProfile);
-    } catch (error) {
-      console.log(error);
-    }
+      .then(setProfile);
+    //  .then(() => {
+    //  setError(null);
+    // })
+    // .catch(error);
+    // .finally(() => {
+    //   setLoading(false);
+    // });
   }, [id]);
 
   return (

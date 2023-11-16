@@ -48,55 +48,63 @@ export default function Sidebar(endpoint, setEndpoint) {
     }
   }, [profile]);
 
-  return profile?.map(
-    (profile, index) =>
-      index < 10 && (
-        <Container>
-          {isLoading && <Loading />}
-          {isError && <Error />}
+  return (
+    <Card className="col-3 justify-content-center">
+      <h5 className="mt-4 ms-4 ">Persone che potresti conoscere</h5>{" "}
+      {profile?.map(
+        (profile, index) =>
+          index < 10 && (
+            <Container>
+              {isLoading && <Loading />}
+              {isError && <Error />}
 
-          <Card
-            className={cn("d-flex border-0", styles.card)}
-            key={profile._id}
-          >
-            <Card.Body className="d-flex flex-row p-4">
-              <Col className="d-flex flex-row">
-                <Card.Img
-                  src={profile.image}
-                  className="rounded-circle border border-white border-4"
-                  style={{
-                    width: "50px",
-                    height: "50px",
-                    backgroundColor: "#E7E2DC",
-                    inset: "110px 0 0 25px",
-                  }}
-                />
-                <Container>
-                  <Card.Title className="d-flex flex-row">
-                    <Link
-                      to={`/${profile._id}`}
-                      className="link-offset-2 link-underline link-underline-opacity-0 text-dark"
-                    >
-                      <h5 className="fw-bolder me-2">{profile.name}</h5>
-                      <h5 className="fw-bolder">{profile.surname}</h5>
-                    </Link>
-                  </Card.Title>
+              <Card
+                className={cn("d-flex border-0", styles.card)}
+                key={profile._id}
+              >
+                <Card.Body className="d-flex flex-row p-4">
+                  <Col className="d-flex flex-row">
+                    <Card.Img
+                      src={profile.image}
+                      className="rounded-circle border border-white border-4"
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        backgroundColor: "#E7E2DC",
+                        inset: "110px 0 0 25px",
+                      }}
+                    />
+                    <Container>
+                      <Card.Title className="d-flex flex-row">
+                        <Link
+                          to={`/SpecificProfile/${profile._id}`}
+                          key={profile._id}
+                          className="link-offset-2 link-underline link-underline-opacity-0 text-dark"
+                        >
+                          <h5 className="fw-bolder me-2">{profile.name}</h5>
+                          <h5 className="fw-bolder">{profile.surname}</h5>
+                        </Link>
+                      </Card.Title>
 
-                  <h5 className="text-muted">{profile.title}</h5>
+                      <h5 className="text-muted">{profile.title}</h5>
 
-                  <Button
-                    variant="outline-dark"
-                    className="rounded-3 rounded-pill"
-                  >
-                    <PersonPlusFill />
-                    Collegati
-                  </Button>
-                </Container>
-              </Col>
-            </Card.Body>
-          </Card>
-        </Container>
-      )
+                      <Button
+                        variant="outline-dark"
+                        className="rounded-3 rounded-pill"
+                      >
+                        <PersonPlusFill />
+                        Collegati
+                      </Button>
+                    </Container>
+                  </Col>
+                </Card.Body>
+              </Card>
+            </Container>
+          )
+      )}
+      <hr />
+      <h5 className="text-muted align-self-center">Mostra tutto</h5>
+    </Card>
   );
 }
 

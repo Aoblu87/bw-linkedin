@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import './App.scss';
 import Footer from './components/Footer/Footer';
-import Main from './components/Main';
 
-import MyNavbar from './components/MyNavbar/MyNavbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import MyNavbar from './components/MyNavbar/MyNavbar';
+import Profile from './components/Profile/Profile';
+import Sidebar from './components/Sidebar/Sidebar';
+import SpecificProfile from './components/SpecificProfile/SpecificProfile';
 
 
 function App() {
@@ -14,12 +16,14 @@ function App() {
 <BrowserRouter>
     <MyNavbar />
     <Container className="mt-5">
-
-      <Main/>
+    <Row className="g-0 p-5">
+      <Profile/>
+      <Sidebar/>
+      </Row>
       <Footer/>
     </Container>
     <Routes>
-      <Route path = "/Main/:id" element= {<Main />} />
+      <Route path = "/SpecificProfile/:id" element= {< SpecificProfile/>} />
     </Routes>
 </BrowserRouter>
 
