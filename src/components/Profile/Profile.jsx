@@ -51,7 +51,7 @@ export default function Profile() {
   }, [id]);
 
   return (
-    <>
+    <Col className="col-md-8 d-flex flex-column">
       <Card className="rounded-3 me-4 mb-2">
         <div
           className="rounded-top  position-relative"
@@ -124,11 +124,23 @@ export default function Profile() {
             <Card.Title>
               <h4 className="fw-bolder mt-2">Esperienza</h4>
             </Card.Title>
-            {profile && <AddExperience profile={profile} setExperiences={setExperiences} experiences={experiences} />}
+            {profile && (
+              <AddExperience
+                profile={profile}
+                setExperiences={setExperiences}
+                experiences={experiences}
+              />
+            )}
           </div>
-          {profile && <Experience profile={profile} setExperiences={setExperiences} experiences={experiences} />}
+          {profile && (
+            <Experience
+              profile={profile}
+              setExperiences={setExperiences}
+              experiences={experiences}
+            />
+          )}
         </Card.Body>
       </Card>
-    </>
+    </Col>
   );
 }
