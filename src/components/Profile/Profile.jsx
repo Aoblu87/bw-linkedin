@@ -5,18 +5,24 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Experience from "../Experience/Experience";
 
-export default function Profile() {
+export default function Profile({ endpoint, setEndpoint }) {
   const [profile, setProfile] = useState();
-  // const profileId = profile._id;
+
   useEffect(() => {
-    fetch("https://striveschool-api.herokuapp.com/api/profile/me", {
-      headers: {
-        Authorization: process.env.REACT_APP_MY_TOKEN,
-      },
-    })
-      .then((r) => r.json())
-      .then(setProfile);
-  }, []);
+    try {
+      fetch(endpoint, {
+        headers: {
+          Authorization: process.env.REACT_APP_MY_TOKEN,
+        },
+      })
+        .then((r) => r.json())
+        .then(setProfile);
+      console.log(setProfile);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [endpoint]);
+
   return (
     <>
       <Card className="rounded-3 me-4 mb-2">
@@ -84,15 +90,14 @@ export default function Profile() {
           </Col>
         </Card.Body>
       </Card>
-
-      <Card className="rounded-3 me-4 mb-2">      
-      <Card.Body>
-        <Card.Title><h4 className="fw-bolder mt-2">Esperienza</h4></Card.Title>
-        {profile && <Experience profile={profile} />}
-      </Card.Body>
-    </Card>
-      
-      
+      <Card className="rounded-3 me-4 mb-2">
+        <Card.Body>
+          <Card.Title>
+            <h4 className="fw-bolder mt-2">Esperienza</h4>
+          </Card.Title>
+          {profile && <Experience profile={profile} />}
+        </Card.Body>
+      </Card>
     </>
   );
 }
