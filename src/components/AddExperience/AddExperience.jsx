@@ -1,60 +1,66 @@
-import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { toast } from "react-toastify";
+import { useState, useEffect } from 'react'
+import { Button, Form } from 'react-bootstrap'
+import { toast } from 'react-toastify'
 
 import Modal from "react-bootstrap/Modal";
 import { PlusLg } from "react-bootstrap-icons";
 
-const AddExperience = ({ profile }) => {
+const AddExperience = ({ profile, setExperiences, experiences }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [experience, setExperience] = useState({
-    role: "",
-    company: "",
-    startDate: 1,
-    endDate: 1,
-    description: "",
-    area: "",
-  });
-  console.log(experience);
+    role: '',
+    company: '',
+    startDate: '',
+    endDate: '',
+    description: '',
+    area: '',
+  })
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    setExperience((c) => ({
+      ...c,
+    }))
+  }, [])
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
-        {
-          headers: {
-            Authorization: process.env.REACT_APP_MY_TOKEN,
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(experience),
-        }
-      ).then(function (response) {
-        if (response.ok) {
-          toast.success("Esperienza aggiunta!", {
-            position: toast.POSITION.BOTTOM_RIGHT,
-          });
-        } else {
-          toast.error("Something went wrong!", {
-            position: toast.POSITION.TOP_LEFT,
-          });
-        }
-      });
+      let response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`, {
+        headers: {
+          Authorization: process.env.REACT_APP_MY_TOKEN,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(experience),
+      })
+
+      if (response.ok) {
+        toast.success("Esperienza aggiunta!");
+        setExperience({
+          role: '',
+          company: '',
+          startDate: '',
+          endDate: '',
+          description: '',
+          area: '',
+        })
+      } else {
+        throw new Error('Qualcosa è andato storto')
+      }
+
+
     } catch (error) {
-      console.log(error);
+      toast.warn(error)
     }
-  };
+  }
 
   return (
     <>
-      <Button
-        variant="outline-dark"
-        className="rounded-3 rounded-pill align-self-center"
-        onClick={handleShow}
-      >
+      <Button variant="outline-dark" className="rounded-3 rounded-pill align-self-center" onClick={handleShow}>
         <PlusLg />
       </Button>
 
@@ -62,40 +68,62 @@ const AddExperience = ({ profile }) => {
         <Modal.Header closeButton>
           <Modal.Title>Add Experience</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Body>
+
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Role</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Role"
-                value={profile.role}
-                onChange={(e) => setExperience(e.target.value)}
+                value={experience.role}
+                onChange={(e) =>
+                  setExperience({
+                    ...experience,
+                    role: e.target.value
+                  })
+                }
               />
+
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Company</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Company"
-                value={profile.company}
-                onChange={(e) => setExperience(e.target.value)}
+                value={experience.company}
+                onChange={(e) =>
+                  setExperience({
+                    ...experience,
+                    company: e.target.value
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Start Date</Form.Label>
               <Form.Control
                 type="date"
-                value={profile.startDate}
-                onChange={(e) => setExperience(e.target.value)}
+                value={experience.startDate}
+                onChange={(e) =>
+                  setExperience({
+                    ...experience,
+                    startDate: e.target.value
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>End Date</Form.Label>
               <Form.Control
                 type="date"
-                value={profile.endDate}
-                onChange={(e) => setExperience(e.target.value)}
+                value={experience.endDate}
+                onChange={(e) =>
+                  setExperience({
+                    ...experience,
+                    endDate: e.target.value
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -103,8 +131,13 @@ const AddExperience = ({ profile }) => {
               <Form.Control
                 type="text"
                 placeholder="Description"
-                value={profile.description}
-                onChange={(e) => setExperience(e.target.value)}
+                value={experience.description}
+                onChange={(e) =>
+                  setExperience({
+                    ...experience,
+                    description: e.target.value
+                  })
+                }
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -112,26 +145,29 @@ const AddExperience = ({ profile }) => {
               <Form.Control
                 type="text"
                 placeholder="Area"
-                value={profile.area}
-                onChange={(e) => setExperience(e.target.value)}
+                value={experience.area}
+                onChange={(e) =>
+                  setExperience({
+                    ...experience,
+                    area: e.target.value
+                  })
+                }
               />
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            variant="secondary rounded-3 rounded-pill"
-            onClick={handleClose}
-          >
-            Close
-          </Button>
-          <Button variant="primary rounded-3 rounded-pill" type="submit">
-            Add Experience
-          </Button>
-        </Modal.Footer>
+
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary rounded-3 rounded-pill" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary rounded-3 rounded-pill" type="submit">
+              Add Experience
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
 };
 
-export default AddExperience;
+export default AddExperience

@@ -118,18 +118,17 @@ export default function Profile() {
           </Card.Body>
         </Card>
 
-        <Card className="rounded-3 me-4 mb-2">
-          <Card.Body>
-            <div className="d-flex justify-content-between">
-              <Card.Title>
-                <h4 className="fw-bolder mt-2">Esperienza</h4>
-              </Card.Title>
-              {profile && <AddExperience profile={profile} />}
-            </div>
-            {profile && <Experience profile={profile} />}
-          </Card.Body>
-        </Card>
-      </Col>
+      <Card className="rounded-3 me-4 mb-2">
+        <Card.Body>
+          <div className="d-flex justify-content-between">
+            <Card.Title>
+              <h4 className="fw-bolder mt-2">Esperienza</h4>
+            </Card.Title>
+            {profile && <AddExperience profile={profile} setExperiences={setExperiences} experiences={experiences} />}
+          </div>
+          {profile && <Experience profile={profile} setExperiences={setExperiences} experiences={experiences} />}
+        </Card.Body>
+      </Card>
     </>
   );
 }
