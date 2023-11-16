@@ -104,6 +104,7 @@ export default function Sidebar(endpoint, setEndpoint) {
 https://striveschool-api.herokuapp.com/api/profile/
 https://striveschool-api.herokuapp.com/api/profile/me
 https://striveschool-api.herokuapp.com/api/profile/{userId}
+https://striveschool-api.herokuapp.com/api/profile/{userId}/picture
 https://striveschool-api.herokuapp.com/api/profile/:userId/experiences
 https://striveschool-api.herokuapp.com/api/profile/:userId/experiences
 

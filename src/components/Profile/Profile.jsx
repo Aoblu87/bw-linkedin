@@ -6,9 +6,12 @@ import Card from "react-bootstrap/Card";
 import Experience from "../Experience/Experience";
 import AddExperience from "../AddExperience/AddExperience";
 import { useParams } from "react-router-dom";
+import Foto from "../Foto"
 
 export default function Profile() {
   const [profile, setProfile] = useState();
+  const [experiences, setExperiences] = useState();
+
   const { id } = useParams();
 
   // useEffect(() => {
@@ -66,8 +69,8 @@ export default function Profile() {
             height: "150px",
             backgroundColor: "#E7E2DC",
             inset: "110px 0 0 25px",
-          }}
-        ></div>
+          }} >{profile?.image}</div>
+        <Foto />
         <Card.Body className="d-flex flex-row p-4">
           <Col>
             <Card.Title className="d-flex flex-row">
