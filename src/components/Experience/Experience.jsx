@@ -5,8 +5,8 @@ import logoWork from "../../assets/logo-workexperience.png";
 import styles from "./styles.module.scss";
 import cn from "classnames";
 
-export default function Experience({ profile, endpoint, setEndpoint }) {
-  const [experiences, setExperiences] = useState();
+export default function Experience({ profile, endpoint, setEndpoint, setExperiences, experiences }) {
+  
 
   useEffect(() => {
     fetch(

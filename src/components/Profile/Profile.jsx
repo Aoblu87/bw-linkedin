@@ -8,6 +8,7 @@ import AddExperience from "../AddExperience/AddExperience";
 
 export default function Profile({ endpoint, setEndpoint }) {
   const [profile, setProfile] = useState();
+  const [experiences, setExperiences] = useState();
 
   useEffect(() => {
     try {
@@ -98,9 +99,9 @@ export default function Profile({ endpoint, setEndpoint }) {
             <Card.Title>
               <h4 className="fw-bolder mt-2">Esperienza</h4>              
             </Card.Title>
-            {profile && <AddExperience profile={profile} />}
+            {profile && <AddExperience profile={profile} setExperiences={setExperiences} experiences={experiences}/>}
           </div>
-          {profile && <Experience profile={profile} />}
+          {profile && <Experience profile={profile} setExperiences={setExperiences} experiences={experiences}/>}
         </Card.Body>
       </Card>
     </>
