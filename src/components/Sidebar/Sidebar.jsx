@@ -1,12 +1,13 @@
 import cn from "classnames";
 import { useEffect, useState } from "react";
 import { Col, Container } from "react-bootstrap";
-import { Link, PersonPlusFill } from "react-bootstrap-icons";
+import { PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Error from "../Error";
 import Loading from "../Loading";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
 
 export default function Sidebar(endpoint, setEndpoint) {
   const [profile, setProfile] = useState();
@@ -73,12 +74,7 @@ export default function Sidebar(endpoint, setEndpoint) {
                 <Container>
                   <Card.Title className="d-flex flex-row">
                     <Link
-                      to={"/"}
-                      onClick={() =>
-                        setEndpoint(
-                          `https://striveschool-api.herokuapp.com/api/profile/${profile._id}`
-                        )
-                      }
+                      to={`/${profile._id}`}
                       className="link-offset-2 link-underline link-underline-opacity-0 text-dark"
                     >
                       <h5 className="fw-bolder me-2">{profile.name}</h5>

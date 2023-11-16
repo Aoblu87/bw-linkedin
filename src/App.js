@@ -19,7 +19,7 @@ function App() {
       <Footer/>
     </Container>
     <Routes>
-      <Route path = "/" element= {<Main />} />
+      <Route path = "/Main/:id" element= {<Main />} />
     </Routes>
 </BrowserRouter>
 

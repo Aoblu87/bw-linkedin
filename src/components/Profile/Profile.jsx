@@ -5,14 +5,36 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Experience from "../Experience/Experience";
 import AddExperience from "../AddExperience/AddExperience";
+import { useParams } from "react-router-dom";
 
-export default function Profile({ endpoint, setEndpoint }) {
+export default function Profile() {
   const [profile, setProfile] = useState();
-  const [experiences, setExperiences] = useState();
+  const { id } = useParams();
+
+  // useEffect(() => {
+  //   // setLoading(true);
+  //   fetch("https://striveschool-api.herokuapp.com/api/profile/" + id, {
+  //     headers: {
+  //       Authorization: process.env.REACT_APP_MY_TOKEN,
+  //     },
+  //   })
+  //     .then((r) => {
+  //       if (!r.ok) throw new Error("Errore nella richiesta");
+  //       return r.json();
+  //     })
+  //     .then(setProfile);
+  //   //  .then(() => {
+  //   //  setError(null);
+  //   // })
+  //   // .catch(error);
+  //   // .finally(() => {
+  //   //   setLoading(false);
+  //   // });
+  // }, [id]);
 
   useEffect(() => {
     try {
-      fetch(endpoint, {
+      fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
         headers: {
           Authorization: process.env.REACT_APP_MY_TOKEN,
         },
@@ -23,7 +45,7 @@ export default function Profile({ endpoint, setEndpoint }) {
     } catch (error) {
       console.log(error);
     }
-  }, [endpoint]);
+  }, [id]);
 
   return (
     <>
@@ -97,11 +119,11 @@ export default function Profile({ endpoint, setEndpoint }) {
         <Card.Body>
           <div className="d-flex justify-content-between">
             <Card.Title>
-              <h4 className="fw-bolder mt-2">Esperienza</h4>              
+              <h4 className="fw-bolder mt-2">Esperienza</h4>
             </Card.Title>
-            {profile && <AddExperience profile={profile} setExperiences={setExperiences} experiences={experiences}/>}
+            {profile && <AddExperience profile={profile} setExperiences={setExperiences} experiences={experiences} />}
           </div>
-          {profile && <Experience profile={profile} setExperiences={setExperiences} experiences={experiences}/>}
+          {profile && <Experience profile={profile} setExperiences={setExperiences} experiences={experiences} />}
         </Card.Body>
       </Card>
     </>

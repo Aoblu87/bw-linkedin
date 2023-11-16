@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
-import Modal from 'react-bootstrap/Modal';
+import Modal from "react-bootstrap/Modal";
 import { PlusLg } from "react-bootstrap-icons";
-
 
 const AddExperience = ({ profile, setExperiences, experiences }) => {
   const [show, setShow] = useState(false);
@@ -169,6 +168,6 @@ const AddExperience = ({ profile, setExperiences, experiences }) => {
       </Modal>
     </>
   );
-}
+};
 
 export default AddExperience
