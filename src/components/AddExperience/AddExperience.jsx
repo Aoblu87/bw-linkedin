@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 
@@ -21,9 +21,7 @@ import { PlusLg } from "react-bootstrap-icons";
 
   
   const handleSubmit = (e) => {
-    e.preventDefault();    
-
-   
+    e.preventDefault();       
     try {
       fetch(`https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`, {
         headers: {
@@ -45,13 +43,11 @@ import { PlusLg } from "react-bootstrap-icons";
           }
         })
 
-        .then(setExperience)
-        .finally(() => {
-          
-        });
+       
+        
     } catch (error) {
       console.log(error);
-    }
+    }}
   
   return (
     <>
@@ -130,6 +126,6 @@ import { PlusLg } from "react-bootstrap-icons";
           </Modal>
     </>
   );
-}}
+}
 
 export default AddExperience

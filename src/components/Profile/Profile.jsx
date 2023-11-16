@@ -96,9 +96,9 @@ export default function Profile({ endpoint, setEndpoint }) {
         <Card.Body>
           <div className="d-flex justify-content-between">
             <Card.Title>
-              <h4 className="fw-bolder mt-2">Esperienza</h4>
+              <h4 className="fw-bolder mt-2">Esperienza</h4>              
             </Card.Title>
-            <AddExperience />
+            {profile && <AddExperience profile={profile} />}
           </div>
           {profile && <Experience profile={profile} />}
         </Card.Body>
