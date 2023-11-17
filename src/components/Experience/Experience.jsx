@@ -1,13 +1,17 @@
-import { useEffect, useState } from "react";
+import cn from "classnames";
+import { useEffect } from "react";
 import { Card, Col, Figure, Row } from "react-bootstrap";
 import { Dot } from "react-bootstrap-icons";
 import logoWork from "../../assets/logo-workexperience.png";
 import styles from "./styles.module.scss";
-import cn from "classnames";
 
-export default function Experience({ profile, endpoint, setEndpoint, setExperiences, experiences }) {
-  
-
+export default function Experience({
+  profile,
+  endpoint,
+  setEndpoint,
+  setExperiences,
+  experiences,
+}) {
   useEffect(() => {
     fetch(
       `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
@@ -19,7 +23,7 @@ export default function Experience({ profile, endpoint, setEndpoint, setExperien
     )
       .then((r) => r.json())
       .then(setExperiences);
-  }, [profile._id]);
+  }, [profile._id, setExperiences]);
 
   // "role":"Nanny",
   // "company":"WC",
