@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col } from "react-bootstrap";
+import { Col, Image } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -48,7 +48,7 @@ export default function Profile() {
             inset: "110px 0 0 25px",
           }}
         >
-          {profile?.image}
+          <Image src={profile?.image} alt="Profile user" fluid roundedCircle />
         </div>
         <Foto profile={profile} setProfile={setProfile} />
         <Card.Body className="d-flex flex-row p-4">

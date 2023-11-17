@@ -7,11 +7,13 @@ import styles from "./styles.module.scss";
 
 export default function Experience({
   profile,
-  endpoint,
-  setEndpoint,
+
   setExperiences,
   experiences,
 }) {
+  // const [show, setShow] = useState(false);
+  // const handleShow = () => setShow(true);
+  console.log(experiences);
   useEffect(() => {
     fetch(
       `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
@@ -36,7 +38,10 @@ export default function Experience({
     <div>
       {" "}
       {experiences?.map((experience) => (
-        <Card className="rounded-3 me-4 mb-2 border-0" key={experience._id}>
+        <Card
+          className="rounded-3 me-4 mb-2 mt-4 border-0"
+          key={experience._id}
+        >
           <Card.Body className="d-flex flex-column ">
             <Row>
               <Card.Title></Card.Title>
@@ -75,6 +80,19 @@ export default function Experience({
                 </div>
                 <Card.Text>{experience.description}</Card.Text>
               </Col>
+              {/* <Col>
+                <Button
+                  className="position-absolute rounded-3 rounded-pill"
+                  variant="secondary"
+                  onClick={handleShow}
+                  style={{
+                    top: "200px",
+                    left: "140px",
+                  }}
+                >
+                  <PersonFill />
+                </Button>
+              </Col> */}
             </Row>
           </Card.Body>
         </Card>

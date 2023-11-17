@@ -9,7 +9,7 @@ import Loading from "../Loading";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
-export default function Sidebar(endpoint, setEndpoint) {
+export default function Sidebar() {
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -50,11 +50,13 @@ export default function Sidebar(endpoint, setEndpoint) {
 
   return (
     <Card className="col-3 justify-content-center">
-      <h5 className="mt-4 ms-4 ">Persone che potresti conoscere</h5>{" "}
+      <h5 className="fw-bolder fs-6 mt-4 ms-4 ">
+        Persone che potresti conoscere
+      </h5>{" "}
       {profile?.map(
         (profile, index) =>
           index < 10 && (
-            <Container>
+            <Container className="p-0">
               {isLoading && <Loading />}
               {isError && <Error />}
 
@@ -62,7 +64,7 @@ export default function Sidebar(endpoint, setEndpoint) {
                 className={cn("d-flex border-0", styles.card)}
                 key={profile._id}
               >
-                <Card.Body className="d-flex flex-row p-4">
+                <Card.Body className="d-flex flex-row p-3">
                   <Col className="d-flex flex-row">
                     <Card.Img
                       src={profile.image}
@@ -74,14 +76,15 @@ export default function Sidebar(endpoint, setEndpoint) {
                         inset: "110px 0 0 25px",
                       }}
                     />
-                    <Container>
-                      <Card.Title className="d-flex flex-row">
+                    <Container className="p-0">
+                      <Card.Title className="d-flex flex-row ms-3  ">
                         <Link
                           to={`/SpecificProfile/${profile._id}`}
                           key={profile._id}
-                          className="link-offset-2 link-underline link-underline-opacity-0 text-dark"
+                          className="link-offset-2 link-underline link-underline-opacity-0 text-dark p-0"
                         >
-                          <h5 className="fw-bolder me-2">{profile.name}</h5>
+                          <h5 className="fw-bolder ">{profile.name}</h5>
+
                           <h5 className="fw-bolder">{profile.surname}</h5>
                         </Link>
                       </Card.Title>
@@ -89,8 +92,8 @@ export default function Sidebar(endpoint, setEndpoint) {
                       <h5 className="text-muted">{profile.title}</h5>
 
                       <Button
-                        variant="outline-dark"
-                        className="rounded-3 rounded-pill"
+                        variant="outline-light text-secondary"
+                        className="fw-bold rounded-3 rounded-pill  me-2"
                       >
                         <PersonPlusFill />
                         Collegati
@@ -103,7 +106,9 @@ export default function Sidebar(endpoint, setEndpoint) {
           )
       )}
       <hr />
-      <h5 className="text-muted align-self-center">Mostra tutto</h5>
+      <Col className="d-flex justify-content-center align-items-center">
+        <h5 className="text-muted align-self-center fw-bolder">Mostra tutto</h5>
+      </Col>
     </Card>
   );
 }
