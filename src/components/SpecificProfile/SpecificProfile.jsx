@@ -7,7 +7,7 @@ import Experience from "../Experience/Experience";
 import AddExperience from "../AddExperience/AddExperience";
 import { useParams } from "react-router-dom";
 
-export default function Profile() {
+export default function SpecificProfile() {
   const [profile, setProfile] = useState();
   const { id } = useParams();
 
@@ -30,7 +30,7 @@ export default function Profile() {
     // .finally(() => {
     //   setLoading(false);
     // });
-  }, [id]);
+  }, [id, setProfile]);
 
   return (
     <>
