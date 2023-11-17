@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 export default function Profile() {
   const [profile, setProfile] = useState();
   const { id } = useParams();
+  const [experiences, setExperiences] = useState();
 
   // useEffect(() => {
   //   // setLoading(true);
