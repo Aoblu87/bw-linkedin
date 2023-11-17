@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Col, Image } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
@@ -6,15 +6,17 @@ import Card from "react-bootstrap/Card";
 import AddExperience from "../AddExperience/AddExperience";
 import Experience from "../Experience/Experience";
 import Foto from "../Foto";
+import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const [profile, setProfile] = useState();
 
   const [experiences, setExperiences] = useState();
+  const { id } = useParams();
 
-  useEffect(() => {
+  const getUserData = useCallback(() => {
     try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
+      fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}`, {
         headers: {
           Authorization: process.env.REACT_APP_MY_TOKEN,
         },
@@ -25,7 +27,11 @@ export default function Profile() {
     } catch (error) {
       console.log(error);
     }
-  }, [setProfile]);
+  }, [id]);
+
+  useEffect(() => {
+    getUserData();
+  }, [getUserData]);
 
   return (
     <Col className="col-md-8 d-flex flex-column">
@@ -40,11 +46,11 @@ export default function Profile() {
           }}
         ></div>
         <div
-          className="rounded-circle border border-white border-4 position-absolute"
+          className="rounded-circle  position-absolute"
+          fluid
           style={{
-            width: "150px",
-            height: "150px",
-            backgroundColor: "#E7E2DC",
+            width: "20%",
+
             inset: "110px 0 0 25px",
           }}
         >
@@ -68,7 +74,7 @@ export default function Profile() {
             <Card.Text className="fs-6  text-secondary ">
               348 collegamenti
             </Card.Text>
-            <Col className="mt-2">
+            <Col className="d-flex flex-sm-column flex-md-row mt-2">
               <Button
                 className="fw-bold rounded-3 rounded-pill  me-2"
                 variant="primary"
@@ -89,11 +95,6 @@ export default function Profile() {
                 Altro
               </Button>
             </Col>
-          </Col>
-          <Col md={4} className="mt-5">
-            <Card.Link className="fs-6 fw-bolder  text-dark ">
-              Università di Pisa
-            </Card.Link>
           </Col>
         </Card.Body>
       </Card>

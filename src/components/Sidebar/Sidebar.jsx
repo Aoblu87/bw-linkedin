@@ -79,7 +79,7 @@ export default function Sidebar() {
                     <Container className="p-0">
                       <Card.Title className="d-flex flex-row ms-3  ">
                         <Link
-                          to={`/SpecificProfile/${profile._id}`}
+                          to={`/${profile._id}`}
                           key={profile._id}
                           className="link-offset-2 link-underline link-underline-opacity-0 text-dark p-0"
                         >

@@ -15,6 +15,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import styles from "./styles.module.scss";
 import cn from "classnames";
+import { Link } from "react-router-dom";
 
 function MyNavbar() {
   return (
@@ -80,16 +81,17 @@ function MyNavbar() {
                   <BellFill className="fs-5" />
                   <h6>Notifiche</h6>
                 </Nav.Link>
-                <Nav.Link
-                  href="#action6"
-                  className="d-flex flex-column align-items-center col-lg-2"
+
+                <Link
+                  to={"/me"}
+                  className="d-flex flex-column align-items-center col-lg-2 link-secondary nav-link "
                 >
                   <PersonCircle className="fs-5" />
-                  <Container className="d-flex flex-row">
+                  <Container className="d-flex flex-row justify-content-center">
                     <h6>Tu</h6>
                     <CaretDownFill className="fs-6" />
                   </Container>
-                </Nav.Link>
+                </Link>
               </Row>
             </Container>
             <Nav.Link
@@ -97,7 +99,7 @@ function MyNavbar() {
               className="d-flex flex-column align-items-center col-lg-3"
             >
               <Grid3x3GapFill className="fs-5" />
-              <Container className="d-flex flex-row">
+              <Container className="d-flex flex-row justify-content-center">
                 <h6 style={{ fontSize: "8px" }}>Per le aziende</h6>
                 <CaretDownFill className="fs-6" />
               </Container>
