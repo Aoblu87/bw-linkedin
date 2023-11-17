@@ -12,27 +12,6 @@ export default function Profile() {
 
   const [experiences, setExperiences] = useState();
 
-  // useEffect(() => {
-  //   // setLoading(true);
-  //   fetch("https://striveschool-api.herokuapp.com/api/profile/" + id, {
-  //     headers: {
-  //       Authorization: process.env.REACT_APP_MY_TOKEN,
-  //     },
-  //   })
-  //     .then((r) => {
-  //       if (!r.ok) throw new Error("Errore nella richiesta");
-  //       return r.json();
-  //     })
-  //     .then(setProfile);
-  //   //  .then(() => {
-  //   //  setError(null);
-  //   // })
-  //   // .catch(error);
-  //   // .finally(() => {
-  //   //   setLoading(false);
-  //   // });
-  // }, [id]);
-
   useEffect(() => {
     try {
       fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
@@ -71,7 +50,7 @@ export default function Profile() {
         >
           {profile?.image}
         </div>
-        <Foto />
+        <Foto profile={profile} setProfile={setProfile} />
         <Card.Body className="d-flex flex-row p-4">
           <Col>
             <Card.Title className="d-flex flex-row">
