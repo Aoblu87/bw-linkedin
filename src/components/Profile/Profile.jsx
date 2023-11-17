@@ -3,15 +3,14 @@ import { Col } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Experience from "../Experience/Experience";
 import AddExperience from "../AddExperience/AddExperience";
-import { useParams } from "react-router-dom";
+import Experience from "../Experience/Experience";
 import Foto from "../Foto";
 
 export default function Profile() {
   const [profile, setProfile] = useState();
+
   const [experiences, setExperiences] = useState();
-  const { id } = useParams();
 
   // useEffect(() => {
   //   // setLoading(true);
@@ -47,7 +46,7 @@ export default function Profile() {
     } catch (error) {
       console.log(error);
     }
-  }, [id]);
+  }, [setProfile]);
 
   return (
     <Col className="col-md-8 d-flex flex-column">

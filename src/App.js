@@ -19,12 +19,14 @@ function App() {
     <Row className="g-0 p-5">
       <Profile/>
       <Sidebar/>
+    <Routes>
+      {/* <Route path="/" element={<Profile/>}></Route> */}
+      <Route path = "/SpecificProfile/:id" element= {< SpecificProfile/>} />
+    </Routes>
       </Row>
       <Footer/>
     </Container>
-    <Routes>
-      <Route path = "/SpecificProfile/:id" element= {< SpecificProfile/>} />
-    </Routes>
+
 </BrowserRouter>
 
 
