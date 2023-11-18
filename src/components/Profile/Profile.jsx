@@ -54,7 +54,11 @@ export default function Profile() {
             inset: "110px 0 0 25px",
           }}
         >
-          <Image src={profile?.image} alt="Profile user" fluid roundedCircle />
+          <Image src={profile?.image} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
+            height: "140px",
+            width: "140px",
+            objectFit: "cover",
+          }} />
         </div>
         <Foto profile={profile} setProfile={setProfile} />
         <Card.Body className="d-flex flex-row p-4">
