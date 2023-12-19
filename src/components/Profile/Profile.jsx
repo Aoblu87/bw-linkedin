@@ -16,7 +16,7 @@ export default function Profile() {
 
   const getUserData = useCallback(() => {
     try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profiles/${id}`, {
+      fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}`, {
         headers: {
           Authorization: process.env.REACT_APP_MY_TOKEN,
         },
@@ -47,18 +47,23 @@ export default function Profile() {
         ></div>
         <div
           className="rounded-circle  position-absolute"
-          fluid
           style={{
             width: "20%",
 
             inset: "110px 0 0 25px",
           }}
         >
-          <Image src={profile?.image} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
-            height: "140px",
-            width: "140px",
-            objectFit: "cover",
-          }} />
+          <Image
+            src={profile?.image}
+            alt="Profile user"
+            roundedCircle
+            className="img-fluid"
+            style={{
+              height: "140px",
+              width: "140px",
+              objectFit: "cover",
+            }}
+          />
         </div>
         <Foto profile={profile} setProfile={setProfile} />
         <Card.Body className="d-flex flex-row p-4">
