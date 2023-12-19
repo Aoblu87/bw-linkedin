@@ -16,7 +16,7 @@ export default function Profile() {
 
   const getUserData = useCallback(() => {
     try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profile/${id}`, {
+      fetch(`https://striveschool-api.herokuapp.com/api/profiles/${id}`, {
         headers: {
           Authorization: process.env.REACT_APP_MY_TOKEN,
         },
