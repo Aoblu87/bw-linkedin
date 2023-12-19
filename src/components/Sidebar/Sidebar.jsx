@@ -95,7 +95,7 @@ export default function Sidebar() {
                         variant="outline-light text-secondary"
                         className="fw-bold rounded-3 rounded-pill  me-2"
                       >
-                        <PersonPlusFill />
+                        <PersonPlusFill className="me-1" />
                         Collegati
                       </Button>
                     </Container>
