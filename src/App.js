@@ -1,6 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
-import Profile from "./components/Profile/Profile";
 import Main from "./components/Main";
 import SpecificProfileViewer from "./components/SpecificProfileViewer";
 

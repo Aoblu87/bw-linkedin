@@ -83,7 +83,7 @@ export default function Profile() {
                 className="fw-bold rounded-3 rounded-pill  me-2"
                 variant="primary"
               >
-                <PersonPlusFill />
+                <PersonPlusFill className="me-1" />
                 Collegati
               </Button>
               <Button
