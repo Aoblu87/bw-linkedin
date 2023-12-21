@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Col } from "react-bootstrap";
+import { Col, Image } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -13,7 +13,7 @@ export default function SpecificProfile() {
 
   useEffect(() => {
     // setLoading(true);
-    fetch("https://striveschool-api.herokuapp.com/api/profile/" + id, {
+    fetch("http://localhost:3025/api/profiles/" + id, {
       headers: {
         Authorization: process.env.REACT_APP_MY_TOKEN,
       },
@@ -53,12 +53,18 @@ export default function SpecificProfile() {
               backgroundColor: "#E7E2DC",
               inset: "110px 0 0 25px",
             }}
-          ></div>
+          >
+            <Image src={profile?.photo} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
+              height: "140px",
+              width: "140px",
+              objectFit: "cover",
+            }} />
+          </div>
           <Card.Body className="d-flex flex-row p-4">
             <Col>
               <Card.Title className="d-flex flex-row">
-                <h4 className="fw-bolder mt-5 me-2">{profile?.name}</h4>
-                <h4 className="fw-bolder mt-5">{profile?.surname}</h4>
+                <h4 className="fw-bolder mt-5 me-2">{profile?.firstName}</h4>
+                <h4 className="fw-bolder mt-5">{profile?.lastName}</h4>
               </Card.Title>
               <Card.Subtitle>
                 {profile?.title} - Università di Pisa

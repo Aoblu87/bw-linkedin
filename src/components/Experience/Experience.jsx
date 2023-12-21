@@ -7,32 +7,39 @@ import logoWork from "../../assets/logo-workexperience.png";
 import styles from "./styles.module.scss";
 import ChangeExperience from "../ChangeExperience";
 
-export default function Experience({
+const Experience = async (
   profile,
-
   setExperiences,
   experiences,
-}) {
+  isLoggedIn,
+  setIsLoggedIn
+) => {
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
+  const storedUserId = localStorage.getItem('userId');
+  const storedToken = localStorage.getItem('token');
 
-  // Mostra esperienze-----funzione GET
-  const getExperiences = useCallback(() => {
-    fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+
+  try {
+    // Mostra esperienze-----funzione GET
+
+    const getExperiences = await fetch(
+      `http:/localhost:3025/api/profiles/me/experiences`,
       {
         headers: {
-          Authorization: process.env.REACT_APP_MY_TOKEN,
+          Authorization: storedToken,
         },
       }
     )
-      .then((r) => r.json())
-      .then(setExperiences);
-  }, [profile._id, setExperiences]);
+    if (getExperiences.ok) {
+      const data = await getExperiences.json();
+      setExperiences();
+    }
+  } catch (error) {
+    console.error('Error fetching user data:', error);
 
-  useEffect(() => {
-    getExperiences();
-  }, [getExperiences]);
+
+  }
 
   // Cancella esperienza -----funzione DELETE
   const handleDelete = (id, user) => {
@@ -164,3 +171,6 @@ export default function Experience({
     </div>
   );
 }
+
+
+export default Experience;

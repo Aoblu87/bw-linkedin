@@ -19,7 +19,7 @@ export default function Sidebar() {
       setIsLoading(true);
       try {
         let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/profile/",
+          "http://localhost:3025/api/profiles/",
           {
             headers: {
               Authorization: process.env.REACT_APP_MY_TOKEN,
@@ -67,7 +67,7 @@ export default function Sidebar() {
                 <Card.Body className="d-flex flex-row p-3">
                   <Col className="d-flex flex-row">
                     <Card.Img
-                      src={profile.image}
+                      src={profile.photo}
                       className="rounded-circle border border-white border-4"
                       style={{
                         width: "50px",
@@ -83,9 +83,9 @@ export default function Sidebar() {
                           key={profile._id}
                           className="link-offset-2 link-underline link-underline-opacity-0 text-dark p-0"
                         >
-                          <h5 className="fw-bolder ">{profile.name}</h5>
+                          <h5 className="fw-bolder ">{profile.firstName}</h5>
 
-                          <h5 className="fw-bolder">{profile.surname}</h5>
+                          <h5 className="fw-bolder">{profile.lastName}</h5>
                         </Link>
                       </Card.Title>
 

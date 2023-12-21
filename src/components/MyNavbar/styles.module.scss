@@ -3,5 +3,6 @@ h6 {
     font-size: 10px;
 }
 
-
-
+.custom-toggle::after {
+    display: none !important;
+  }

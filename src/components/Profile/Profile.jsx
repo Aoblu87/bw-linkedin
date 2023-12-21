@@ -10,28 +10,63 @@ import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const [profile, setProfile] = useState();
-
   const [experiences, setExperiences] = useState();
+  const [user, setUser] = useState(null)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { id } = useParams();
 
-  const getUserData = useCallback(() => {
-    try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profiles/${id}`, {
+
+  const isLogged = async () => {
+    const storedUserId = localStorage.getItem('userId');
+    const storedToken = localStorage.getItem('token');
+
+    if (storedUserId) {
+      try {
+        const response = await fetch(`http://localhost:3025/api/profiles/${storedUserId}`, {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        });
+
+        if (response.ok) {
+          const userDetails = await response.json();
+
+          setUser(userDetails);
+          setIsLoggedIn(true);
+
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+
+      }
+    } else if (!storedUserId) {
+
+
+      const getUserData = await fetch(`http://localhost:3025/api/profiles/${id}`, {
         headers: {
           Authorization: process.env.REACT_APP_MY_TOKEN,
         },
       })
-        .then((r) => r.json())
-        .then(setProfile);
-      console.log(setProfile);
-    } catch (error) {
-      console.log(error);
+      if (getUserData.ok) {
+        getUserData.json();
+        setProfile();
+
+      } else {
+        console.error('Error fetching user data')
+      }
+
+
+
+
     }
-  }, [id]);
+  };
 
   useEffect(() => {
-    getUserData();
-  }, [getUserData]);
+
+    isLogged();
+  }, []);
+
+
 
   return (
     <Col className="col-md-8 d-flex flex-column">
@@ -54,7 +89,7 @@ export default function Profile() {
             inset: "110px 0 0 25px",
           }}
         >
-          <Image src={profile?.image} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
+          <Image src={user?.photo} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
             height: "140px",
             width: "140px",
             objectFit: "cover",
@@ -64,12 +99,12 @@ export default function Profile() {
         <Card.Body className="d-flex flex-row p-4">
           <Col>
             <Card.Title className="d-flex flex-row">
-              <h4 className="fw-bolder mt-5 me-2">{profile?.name}</h4>
-              <h4 className="fw-bolder mt-5">{profile?.surname}</h4>
+              <h4 className="fw-bolder mt-5 me-2">{user?.firstName}</h4>
+              <h4 className="fw-bolder mt-5">{user?.lastName}</h4>
             </Card.Title>
-            <Card.Subtitle>{profile?.title} - Università di Pisa</Card.Subtitle>
+            <Card.Subtitle>{user?.title} - Università di Pisa</Card.Subtitle>
             <Card.Text className="fs-6  text-secondary mt-2 ">
-              {profile?.area}
+              {user?.area}
               <Dot />
               <Card.Link className="fw-bolder text-decoration-none ">
                 Informazioni di contatto
@@ -122,6 +157,8 @@ export default function Profile() {
               profile={profile}
               setExperiences={setExperiences}
               experiences={experiences}
+              isLoggedIn={isLoggedIn}
+              setIsLoggedIn={setIsLoggedIn}
             />
           )}
         </Card.Body>

@@ -9,6 +9,8 @@ const AddExperience = ({ profile, setExperiences, experiences }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const storedUserId = localStorage.getItem('userId');
+  const storedToken = localStorage.getItem('token');
   const [experience, setExperience] = useState({
     role: "",
     company: "",
@@ -29,10 +31,10 @@ const AddExperience = ({ profile, setExperiences, experiences }) => {
 
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+        `http://localhost:3025/api/profiles/${profile._id}/experiences`,
         {
           headers: {
-            Authorization: process.env.REACT_APP_MY_TOKEN,
+            Authorization: storedToken,
             "Content-Type": "application/json",
           },
           method: "POST",
