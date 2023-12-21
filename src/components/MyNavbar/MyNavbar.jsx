@@ -1,4 +1,4 @@
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Button, Dropdown } from "react-bootstrap";
 import {
   BellFill,
   BriefcaseFill,
@@ -82,16 +82,42 @@ function MyNavbar() {
                   <h6>Notifiche</h6>
                 </Nav.Link>
 
-                <Link
-                  to={"/me"}
-                  className="d-flex flex-column align-items-center col-lg-2 link-secondary nav-link "
+
+                <Nav.Link
+                  href="#action5"
+                  className="d-flex flex-column align-items-center col-lg-2 p-0"
                 >
-                  <PersonCircle className="fs-5" />
-                  <Container className="d-flex flex-row justify-content-center">
-                    <h6>Tu</h6>
-                    <CaretDownFill className="fs-6" />
-                  </Container>
-                </Link>
+                  <Dropdown>
+                    <Dropdown.Toggle variant="link" id="dropdown-basic" classname="p-0">
+                      <PersonCircle className="fs-5" />
+                      <Container className="d-flex flex-row justify-content-center">
+                        <h6>Tu</h6>
+
+                      </Container>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu >
+                      <Form>
+                        <Form.Group className="my-3 mx-3" controlId="formBasicEmail">
+                          <Form.Label>Email address</Form.Label>
+                          <Form.Control type="email" placeholder="Enter email" />
+                        </Form.Group>
+
+                        <Form.Group className="my-3 mx-3" controlId="formBasicPassword">
+                          <Form.Label>Password</Form.Label>
+                          <Form.Control type="password" placeholder="Password" />
+                        </Form.Group>
+                        <Form.Group className="my-3 mx-3" controlId="formBasicCheckbox" >
+                          <Form.Check type="checkbox" label="Check me out" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit" className="my-3 mx-3">
+                          Submit
+                        </Button>
+                      </Form>
+                    </Dropdown.Menu>
+                  </Dropdown>
+                </Nav.Link>
+
+
               </Row>
             </Container>
             <Nav.Link
