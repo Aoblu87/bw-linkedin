@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-import Modal from "react-bootstrap/Modal";
 import { PlusLg } from "react-bootstrap-icons";
+import Modal from "react-bootstrap/Modal";
 
 const AddExperience = ({ profile, setExperiences, experiences }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  // const storedUserId = localStorage.getItem("userId");
+  const storedToken = localStorage.getItem("token");
   const [experience, setExperience] = useState({
     role: "",
     company: "",

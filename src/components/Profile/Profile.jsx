@@ -1,37 +1,66 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Image } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useParams } from "react-router-dom";
 import AddExperience from "../AddExperience/AddExperience";
 import Experience from "../Experience/Experience";
 import Foto from "../Foto";
-import { useParams } from "react-router-dom";
 
 export default function Profile() {
   const [profile, setProfile] = useState();
 
   const [experiences, setExperiences] = useState();
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { id } = useParams();
 
-  const getUserData = useCallback(() => {
-    try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profiles/${id}`, {
-        headers: {
-          Authorization: process.env.REACT_APP_MY_TOKEN,
-        },
-      })
-        .then((r) => r.json())
-        .then(setProfile);
-      console.log(setProfile);
-    } catch (error) {
-      console.log(error);
+  const isLogged = async () => {
+    const storedUserId = localStorage.getItem("userId");
+    const storedToken = localStorage.getItem("token");
+
+    if (storedUserId) {
+      try {
+        const response = await fetch(
+          `http://localhost:3025/api/profiles/${storedUserId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${storedToken}`,
+            },
+          }
+        );
+
+        if (response.ok) {
+          const userDetails = await response.json();
+
+          setUser(userDetails);
+          setIsLoggedIn(true);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    } else if (!storedUserId) {
+      const getUserData = await fetch(
+        `http://localhost:3025/api/profiles/${id}`,
+        {
+          headers: {
+            Authorization: process.env.REACT_APP_MY_TOKEN,
+          },
+        }
+      );
+      if (getUserData.ok) {
+        getUserData.json();
+        setProfile();
+      } else {
+        console.error("Error fetching user data");
+      }
     }
   }, [id]);
 
   useEffect(() => {
-    getUserData();
-  }, [getUserData]);
+    isLogged();
+  }, []);
 
   return (
     <Col className="col-md-8 d-flex flex-column">
@@ -47,18 +76,23 @@ export default function Profile() {
         ></div>
         <div
           className="rounded-circle  position-absolute"
-          fluid
           style={{
             width: "20%",
 
             inset: "110px 0 0 25px",
           }}
         >
-          <Image src={profile?.image} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
-            height: "140px",
-            width: "140px",
-            objectFit: "cover",
-          }} />
+          <Image
+            src={user?.photo}
+            alt="Profile user"
+            roundedCircle
+            className="img-fluid"
+            style={{
+              height: "140px",
+              width: "140px",
+              objectFit: "cover",
+            }}
+          />
         </div>
         <Foto profile={profile} setProfile={setProfile} />
         <Card.Body className="d-flex flex-row p-4">
