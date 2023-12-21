@@ -56,7 +56,7 @@ export default function Profile() {
         console.error("Error fetching user data");
       }
     }
-  }, [id]);
+  };
 
   useEffect(() => {
     isLogged();
