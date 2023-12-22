@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
 import { GoogleLoginButton } from "react-social-login-buttons"
+import image from "../../assets/Home.png"
 
 function Homepage() {
     const [user, setUser] = useState(null);
@@ -284,7 +285,7 @@ function Homepage() {
 
         <Container className="sfondo">
             <Row>
-                <Col>
+                <Col className="col-lg-6">
                     <h1>
                         Ti diamo il benvenuto nella tua community professionale
                     </h1>
@@ -341,8 +342,10 @@ function Homepage() {
                             /></div>
                     </Form>
                 </Col>
-                <Col>
-                    <Image src="./Homepage/Home.png" />
+                <Col className="col-lg-6">
+                    <Image
+                        src={image}
+                        width={700} />
 
                 </Col>
             </Row>
