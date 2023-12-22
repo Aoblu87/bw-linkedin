@@ -8,18 +8,15 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
-      <home>
-        <Routes>
-          {<Route path="/" element={<Home />}></Route>}
-          {<Route path="/:id" element={<Main />} />}
-          {
-            <Route
-              path="/:SpecificProfile/:id"
-              element={<SpecificProfileViewer />}
-            />
-          }
-        </Routes>
-      </home>
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/:id" element={<Main />} />
+
+        <Route
+          path="/:SpecificProfile/:id"
+          element={<SpecificProfileViewer />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
