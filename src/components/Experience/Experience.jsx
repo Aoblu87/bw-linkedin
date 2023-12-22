@@ -15,20 +15,14 @@ export default function Experience({
 }) {
   const handleShow = () => setShow(true);
   const [show, setShow] = useState(false);
+  const storedUserId = localStorage.getItem("userId");
 
   // Mostra esperienze-----funzione GET
   const getExperiences = useCallback(() => {
-    fetch(
-      `https://striveschool-api.herokuapp.com/api/user/${user._id}/experiences`,
-      {
-        headers: {
-          Authorization: process.env.REACT_APP_MY_TOKEN,
-        },
-      }
-    )
+    fetch(`http://localhost:3025/api/profiles/${storedUserId}/experiences`)
       .then((r) => r.json())
       .then(setExperiences);
-  }, [user._id, setExperiences]);
+  }, [storedUserId, setExperiences]);
 
   useEffect(() => {
     getExperiences();
@@ -39,12 +33,9 @@ export default function Experience({
     // setLoading(true);
     try {
       fetch(
-        `https://striveschool-api.herokuapp.com/api/user/${id}/experiences/${user}`,
+        `http://localhost:3025/api/profiles/experiences/${experiences._id}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization: process.env.REACT_APP_MY_TOKEN,
-          },
         }
       )
         .then((r) => {
@@ -101,25 +92,23 @@ export default function Experience({
                   />
                 </Figure>
                 <Col>
-                  <h4 className="fw-bolder">{experience.role}</h4>
+                  <h4 className="fw-bolder">{experience.companyName}</h4>
 
                   <Card.Subtitle className="mb-3">
-                    {experience.role}
+                    {experience.companyName}
                   </Card.Subtitle>
                   <Card.Subtitle className="mb-3">
-                    {experience.company}
+                    {experience.location}
                   </Card.Subtitle>
                   <Col className="d-flex">
                     <Card.Subtitle className="me-3 mb-3">
-                      {formatDate(experience.startDate)}
+                      {experience.startDate}
                     </Card.Subtitle>
-                    <Card.Subtitle>
-                      {formatDate(experience.endDate)}
-                    </Card.Subtitle>
+                    <Card.Subtitle>{experience.endDate}</Card.Subtitle>
                   </Col>
                   <div>
                     <span className="fs-6  text-secondary mt-2 ">
-                      {experience.area}
+                      {experience.employmentType}
 
                       <Dot />
                     </span>

@@ -57,6 +57,7 @@ export default function Profile() {
           }}
         >
           <Image
+            className="img-fluid"
             src={user?.cover}
             style={{
               height: "13.5rem",
