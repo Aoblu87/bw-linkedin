@@ -13,7 +13,7 @@ export default function Profile() {
   //Dati dell'utente loggato
   const [user, setUser] = useState();
   //Memorizzo se l'utente sia loggato o meno
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export default function Profile() {
       })
       .then((data) => {
         setUser(data);
-        setIsLoggedIn(true);
+        // setIsLoggedIn(true);
       })
       .catch(() => {
         // Se la chiamata API fallisce reindirizzo l'utente alla pagina di login
