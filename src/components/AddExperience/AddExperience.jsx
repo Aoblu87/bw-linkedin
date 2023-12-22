@@ -9,11 +9,12 @@ const AddExperience = ({ user, setExperiences, experiences }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // const storedUserId = localStorage.getItem("userId");
-  // const storedToken = localStorage.getItem("token");
+  const storedUserId = localStorage.getItem("userId");
+  const storedToken = localStorage.getItem("token");
   const [experience, setExperience] = useState({
-    role: "",
-    company: "",
+    user: "",
+    employmentType: "",
+    companyName: "",
     startDate: "",
     endDate: "",
     description: "",
@@ -31,10 +32,11 @@ const AddExperience = ({ user, setExperiences, experiences }) => {
 
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/user/${user._id}/experiences`,
+        `http://localhost:3025/api/profiles/${storedUserId}/experiences`,
+
         {
           headers: {
-            Authorization: process.env.REACT_APP_MY_TOKEN,
+            Authorization: storedToken,
             "Content-Type": "application/json",
           },
           method: "POST",
@@ -47,8 +49,9 @@ const AddExperience = ({ user, setExperiences, experiences }) => {
           position: toast.POSITION.BOTTOM_RIGHT,
         });
         setExperience({
-          role: "",
-          company: "",
+          user: "",
+          employmentType: "",
+          companyName: "",
           startDate: "",
           endDate: "",
           description: "",
@@ -82,15 +85,24 @@ const AddExperience = ({ user, setExperiences, experiences }) => {
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>User</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="User"
+                value={storedUserId}
+
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Employment type</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Role"
-                value={experience.role}
+                value={experience.employmentType}
                 onChange={(e) =>
                   setExperience({
                     ...experience,
-                    role: e.target.value,
+                    employmentType: e.target.value,
                   })
                 }
               />
@@ -100,11 +112,11 @@ const AddExperience = ({ user, setExperiences, experiences }) => {
               <Form.Control
                 type="text"
                 placeholder="Company"
-                value={experience.company}
+                value={experience.companyName}
                 onChange={(e) =>
                   setExperience({
                     ...experience,
-                    company: e.target.value,
+                    companyName: e.target.value,
                   })
                 }
               />
