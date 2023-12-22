@@ -5,12 +5,12 @@ import { toast } from "react-toastify";
 import { PlusLg } from "react-bootstrap-icons";
 import Modal from "react-bootstrap/Modal";
 
-const AddExperience = ({ profile, setExperiences, experiences }) => {
+const AddExperience = ({ user, setExperiences, experiences }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   // const storedUserId = localStorage.getItem("userId");
-  const storedToken = localStorage.getItem("token");
+  // const storedToken = localStorage.getItem("token");
   const [experience, setExperience] = useState({
     role: "",
     company: "",
@@ -31,7 +31,7 @@ const AddExperience = ({ profile, setExperiences, experiences }) => {
 
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+        `https://striveschool-api.herokuapp.com/api/user/${user._id}/experiences`,
         {
           headers: {
             Authorization: process.env.REACT_APP_MY_TOKEN,

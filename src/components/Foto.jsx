@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { CameraFill } from "react-bootstrap-icons";
 import Modal from "react-bootstrap/Modal";
 
-export default function Foto({ profile, setProfile }) {
+export default function Foto({ setUser }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -41,12 +41,12 @@ export default function Foto({ profile, setProfile }) {
     try {
       fetch(`http://localhost:3025/api/profiles/me`)
         .then((r) => r.json())
-        .then(setProfile);
-      console.log(setProfile);
+        .then(setUser);
+      console.log(setUser);
     } catch (error) {
       console.log(error);
     }
-  }, [setProfile]);
+  }, [setUser]);
 
   const handleFile = (e) => {
     setFd((prev) => {

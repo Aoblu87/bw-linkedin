@@ -8,7 +8,7 @@ import styles from "./styles.module.scss";
 import ChangeExperience from "../ChangeExperience";
 
 export default function Experience({
-  profile,
+  user,
 
   setExperiences,
   experiences,
@@ -19,7 +19,7 @@ export default function Experience({
   // Mostra esperienze-----funzione GET
   const getExperiences = useCallback(() => {
     fetch(
-      `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/experiences`,
+      `https://striveschool-api.herokuapp.com/api/user/${user._id}/experiences`,
       {
         headers: {
           Authorization: process.env.REACT_APP_MY_TOKEN,
@@ -28,7 +28,7 @@ export default function Experience({
     )
       .then((r) => r.json())
       .then(setExperiences);
-  }, [profile._id, setExperiences]);
+  }, [user._id, setExperiences]);
 
   useEffect(() => {
     getExperiences();
@@ -39,7 +39,7 @@ export default function Experience({
     // setLoading(true);
     try {
       fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${id}/experiences/${user}`,
+        `https://striveschool-api.herokuapp.com/api/user/${id}/experiences/${user}`,
         {
           method: "DELETE",
           headers: {
