@@ -8,15 +8,16 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <BrowserRouter>
+      {/* <Home /> */}
       <Routes>
-        {<Route path="/" element={<Main />}></Route>}
-        {<Route path="/:id" element={<SpecificProfileViewer />} />}
-        {
-          <Route
-            path="/:SpecificProfile/:id"
-            element={<SpecificProfileViewer />}
-          />
-        }
+        {/* <Route path="/login" element={<Home />}></Route> */}
+        <Route path="/" element={<Main />}></Route>
+        <Route path="/:id" element={<SpecificProfileViewer />}></Route>
+
+        <Route
+          path="/:SpecificProfile/:id"
+          element={<SpecificProfileViewer />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );

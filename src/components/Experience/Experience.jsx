@@ -104,9 +104,6 @@ export default function Experience({
                   <h4 className="fw-bolder">{experience.role}</h4>
 
                   <Card.Subtitle className="mb-3">
-                    {experience.role}
-                  </Card.Subtitle>
-                  <Card.Subtitle className="mb-3">
                     {experience.company}
                   </Card.Subtitle>
                   <Col className="d-flex">
