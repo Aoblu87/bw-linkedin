@@ -16,7 +16,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
 
@@ -129,7 +129,7 @@ function MyNavbar() {
 
         if (response.ok) {
           const userDetails = await response.json();
-          const email = userDetails.email;
+          // const email = userDetails.email;
           setUser(userDetails);
           setIsLoggedIn(true);
 
