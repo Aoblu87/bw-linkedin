@@ -18,6 +18,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import image from "../../assets/Home.png";
 import styles from "./styles.module.scss";
+import { ToastContainer, toast } from "react-toastify";
+import queryString from "query-string";
 
 function Homepage() {
   const [user, setUser] = useState(null);
@@ -25,8 +27,6 @@ function Homepage() {
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const storedUserId = localStorage.getItem("userId");
-  const storedToken = localStorage.getItem("token");
 
   const handleLogin = async (e) => {
     e.preventDefault();
