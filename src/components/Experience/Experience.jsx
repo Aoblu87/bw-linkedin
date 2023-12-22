@@ -4,8 +4,8 @@ import { Button, Card, Col, Figure, Row } from "react-bootstrap";
 import { Dot, PencilFill, Trash3Fill } from "react-bootstrap-icons";
 import { toast } from "react-toastify";
 import logoWork from "../../assets/logo-workexperience.png";
-import styles from "./styles.module.scss";
 import ChangeExperience from "../ChangeExperience";
+import styles from "./styles.module.scss";
 
 export default function Experience({
   user,
@@ -59,11 +59,11 @@ export default function Experience({
   };
 
   // Funzione per formattare la data
-  const formatDate = (dateString) => {
-    const dateObject = new Date(dateString);
-    const formattedDate = dateObject.toISOString().split("T")[0];
-    return formattedDate;
-  };
+  // const formatDate = (dateString) => {
+  //   const dateObject = new Date(dateString);
+  //   const formattedDate = dateObject.toISOString().split("T")[0];
+  //   return formattedDate;
+  // };
 
   // "role":"Nanny",
   // "company":"WC",
@@ -102,9 +102,10 @@ export default function Experience({
                   </Card.Subtitle>
                   <Col className="d-flex">
                     <Card.Subtitle className="me-3 mb-3">
+                      Inizio:
                       {experience.startDate}
                     </Card.Subtitle>
-                    <Card.Subtitle>{experience.endDate}</Card.Subtitle>
+                    <Card.Subtitle> Fine:{experience.endDate}</Card.Subtitle>
                   </Col>
                   <div>
                     <span className="fs-6  text-secondary mt-2 ">
