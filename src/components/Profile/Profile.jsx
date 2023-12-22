@@ -152,7 +152,7 @@ export default function Profile() {
               />
             )}
           </div>
-          {profile && (
+          {/* {profile && (
             <Experience
               profile={profile}
               setExperiences={setExperiences}
@@ -160,7 +160,7 @@ export default function Profile() {
               isLoggedIn={isLoggedIn}
               setIsLoggedIn={setIsLoggedIn}
             />
-          )}
+          )} */}
         </Card.Body>
       </Card>
     </Col>
