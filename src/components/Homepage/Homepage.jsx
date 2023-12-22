@@ -14,6 +14,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
 import { GoogleLoginButton } from "react-social-login-buttons";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import image from "../../assets/Home.png";
 import styles from "./styles.module.scss";
@@ -27,73 +28,29 @@ function Homepage() {
   const storedUserId = localStorage.getItem("userId");
   const storedToken = localStorage.getItem("token");
 
-  //   const handleLogin = async (e) => {
-  //     e.preventDefault();
-  //     try {
-  //       const response = await fetch(
-  //         `http://localhost:3025/api/profiles/session`,
-  //         {
-  //           method: "POST",
-  //           headers: {
-  //             "Content-Type": "application/json",
-  //           },
-  //           body: JSON.stringify({
-  //             email,
-  //             password,
-  //           }),
-  //         }
-  //       );
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:3025/api/profiles/session`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
 
-  //       const data = await response.json();
+      const data = await response.json();
 
-  //       if (data.token) {
-  //         localStorage.setItem("userId", data.userId);
-  //         localStorage.setItem("token", data.token);
-  //         setUser(true);
-  //         toast("You are logged in!!", {
-  //           position: "bottom-right",
-  //           autoClose: 5000,
-  //           hideProgressBar: false,
-  //           closeOnClick: true,
-  //           pauseOnHover: true,
-  //           draggable: true,
-  //           progress: undefined,
-  //           theme: "dark",
-  //         });
-  //       }
-
-  //       const data2 = {
-  //         authorId: localStorage.getItem("userId"),
-  //         token: localStorage.getItem("token"),
-  //       };
-
-  //       const responseGet = await fetch(
-  //         `http://localhost:3025/api/profiles/${data2.userId}`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${data2.token}`,
-  //             method: "GET",
-  //           },
-  //         }
-  //       );
-  //       if (!responseGet.ok) {
-  //         throw new Error(`HTTP error! Status: ${responseGet.status}`);
-  //       } else {
-  //         const data3 = await responseGet.json();
-  //         setUser(data3);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  /*const GoogleCallbackComponent = async () => {
-      const queryParams = queryString.parse(window.location.search);
-      const { token, userId } = queryParams;
-
-      if (token && userId) {
-        localStorage.setItem('token', token);
-        localStorage.setItem('userId', userId);
+      if (data.token) {
+        localStorage.setItem("userId", data.userId);
+        localStorage.setItem("token", data.token);
+        setUser(true);
         toast("You are logged in!!", {
           position: "bottom-right",
           autoClose: 5000,
@@ -104,40 +61,59 @@ function Homepage() {
           progress: undefined,
           theme: "dark",
         });
-      }
-    };
-
-    useEffect(() => {
-      GoogleCallbackComponent();
-    }, []);*/
-
-  const isLogged = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:3025/api/profiles/${storedUserId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${storedToken}`,
-          },
-        }
-      );
-
-      if (response.ok) {
-        const userDetails = await response.json();
-        // const email = userDetails.email;
-        console.log(userDetails);
-        setUser(userDetails);
-        setIsLoggedIn(true);
+        navigate("/Main");
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
+      console.error("Error fetching data:", error);
     }
   };
-
+  // Controllo al render del componente che l'utente abbia ancora un token valido altrimenti lo rimando alla pagina del login
   useEffect(() => {
-    console.log("useEffect is triggered");
-    isLogged();
-  }, []);
+    fetch(`http://localhost:3025/api/profiles/${storedUserId}`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setUser(data);
+        // setIsLoggedIn(true);
+      })
+      .catch(() => {
+        // Se la chiamata API fallisce reindirizzo l'utente alla pagina di login
+        navigate("/");
+      });
+  }, [storedToken, storedUserId, navigate]);
+  //   const isLogged = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `http://localhost:3025/api/profiles/${storedUserId}`,
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${storedToken}`,
+  //           },
+  //         }
+  //       );
+
+  //       if (response.ok) {
+  //         const userDetails = await response.json();
+  //         // const email = userDetails.email;
+  //         console.log(userDetails);
+  //         setUser(userDetails);
+  //         setIsLoggedIn(true);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching user data:", error);
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     console.log("useEffect is triggered");
+  //     isLogged();
+  //   }, []);
 
   return (
     <>
@@ -229,7 +205,7 @@ function Homepage() {
         <Row>
           <Col className="col-lg-6">
             <h1>Ti diamo il benvenuto nella tua community professionale</h1>
-            <Form>
+            <Form onSubmit={handleLogin}>
               <Form.Group className="my-3 mx-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
@@ -253,14 +229,7 @@ function Homepage() {
                 <Form.Check type="checkbox" label="Check me out" />
               </Form.Group>
               <div className="d-flex flex-column">
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className="my-3 mx-3"
-                  onClick={() => {
-                    navigate("/Main");
-                  }}
-                >
+                <Button variant="primary" type="submit" className="my-3 mx-3">
                   Accedi
                 </Button>
 

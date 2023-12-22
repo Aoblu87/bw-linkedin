@@ -19,8 +19,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
-import { GoogleLoginButton } from "react-social-login-buttons"
-import DropdownToggle from 'react-bootstrap/DropdownToggle'
+import { GoogleLoginButton } from "react-social-login-buttons";
+import DropdownToggle from "react-bootstrap/DropdownToggle";
 
 function MyNavbar() {
   const [user, setUser] = useState(null);
@@ -269,8 +269,6 @@ function MyNavbar() {
                         variant="custom"
                         id="dropdown-basic"
                         className="p-0 custom-toggle"
-
-
                       >
                         <PersonCircle className="fs-5" />
                         <Container className="d-flex flex-row justify-content-center">
@@ -319,11 +317,12 @@ function MyNavbar() {
                             Submit
                           </Button>
 
-                          <GoogleLoginButton className="me-3"
+                          <GoogleLoginButton
+                            className="me-3"
                             onClick={() => {
                               window.location.assign(
                                 `http://localhost:3025/api/profiles/google`
-                              )
+                              );
                             }}
                           />
                         </Form>
@@ -340,7 +339,6 @@ function MyNavbar() {
                         variant="custom"
                         id="dropdown-basic"
                         className="p-0 custom-toggle"
-
                       >
                         <Image
                           className="user-avatar"
@@ -357,9 +355,7 @@ function MyNavbar() {
                       <Dropdown.Menu className="login-menu" align="end">
                         <div className="my-3 mx-3">
                           <Row>
-                            <Col xs={"auto"} className="pe-0">
-
-                            </Col>
+                            <Col xs={"auto"} className="pe-0"></Col>
                             <Col className="d-flex align-items-center">
                               <h6 className="mt-2">
                                 {user.firstName} {user.lastName}

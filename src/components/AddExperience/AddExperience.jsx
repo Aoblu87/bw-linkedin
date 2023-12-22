@@ -82,7 +82,7 @@ const AddExperience = ({ user, setExperiences, experiences }) => {
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Role</Form.Label>
+              <Form.Label>Employment type</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Role"
