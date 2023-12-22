@@ -143,13 +143,13 @@ export default function Profile() {
               />
             )}
           </div>
-          {user && (
+          {/* {user && (
             <Experience
               user={user}
               setExperiences={setExperiences}
               experiences={experiences}
             />
-          )}
+          )} */}
         </Card.Body>
       </Card>
     </Col>

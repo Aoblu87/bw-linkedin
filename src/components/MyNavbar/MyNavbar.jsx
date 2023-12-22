@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
+import { GoogleLoginButton } from "react-social-login-buttons"
 
 function MyNavbar() {
   const [user, setUser] = useState(null);
@@ -314,6 +315,14 @@ function MyNavbar() {
                           >
                             Submit
                           </Button>
+
+                          <GoogleLoginButton className="me-3"
+                            onClick={() => {
+                              window.location.assign(
+                                `http://localhost:3025/api/profiles/google`
+                              )
+                            }}
+                          />
                         </Form>
                       </Dropdown.Menu>
                     </Dropdown>
