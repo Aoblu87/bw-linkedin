@@ -8,10 +8,10 @@ import AddExperience from "../AddExperience/AddExperience";
 import Experience from "../Experience/Experience";
 import Foto from "../Foto";
 
-export default function Profile() {
+export default function Profile(props) {
+  const { user, setUser } = props;
   const [experiences, setExperiences] = useState();
   //Dati dell'utente loggato
-  const [user, setUser] = useState();
   //Memorizzo se l'utente sia loggato o meno
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -38,7 +38,7 @@ export default function Profile() {
       })
       .catch(() => {
         // Se la chiamata API fallisce reindirizzo l'utente alla pagina di login
-        navigate("/");
+        navigate("/Main");
       });
   }, [storedToken, storedUserId, navigate]);
 

@@ -17,18 +17,16 @@ import { GoogleLoginButton } from "react-social-login-buttons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import image from "../../assets/Home.png";
+import useJwt from "../../hooks/useJwt";
 import styles from "./styles.module.scss";
 
-function Homepage() {
-  const [user, setUser] = useState(null);
+function Homepage(props) {
+  const { user, setUser } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-
-  //Controllo nel local storage se sono presneti token e userId
-  const storedUserId = localStorage.getItem("userId");
-  const storedToken = localStorage.getItem("token");
+  const { userId, token } = useJwt();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -71,8 +69,8 @@ function Homepage() {
   };
   // Controllo al render del componente che l'utente abbia ancora un token valido altrimenti lo rimando alla pagina del login
   useEffect(() => {
-    fetch(`http://localhost:3025/api/profiles/${storedUserId}`, {
-      headers: { Authorization: `Bearer ${storedToken}` },
+    fetch(`http://localhost:3025/api/profiles/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => {
         if (!response.ok) {
@@ -88,7 +86,7 @@ function Homepage() {
         // Se la chiamata API fallisce reindirizzo l'utente alla pagina di login
         navigate("/");
       });
-  }, [storedToken, storedUserId, navigate]);
+  }, [token, userId, navigate]);
   //   const isLogged = async () => {
   //     try {
   //       const response = await fetch(

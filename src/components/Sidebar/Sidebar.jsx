@@ -9,7 +9,8 @@ import Loading from "../Loading";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar(props) {
+  const { use, setUser } = props;
   const [profile, setProfile] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
