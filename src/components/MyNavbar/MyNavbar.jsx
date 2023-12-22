@@ -16,11 +16,10 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
+import { GoogleLoginButton } from "react-social-login-buttons";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
-import { GoogleLoginButton } from "react-social-login-buttons";
-import DropdownToggle from "react-bootstrap/DropdownToggle";
 
 function MyNavbar() {
   const [user, setUser] = useState(null);
