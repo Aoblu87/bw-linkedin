@@ -20,6 +20,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.scss";
 import { GoogleLoginButton } from "react-social-login-buttons"
+import DropdownToggle from 'react-bootstrap/DropdownToggle'
 
 function MyNavbar() {
   const [user, setUser] = useState(null);
@@ -265,9 +266,11 @@ function MyNavbar() {
                   >
                     <Dropdown>
                       <Dropdown.Toggle
-                        variant="link"
+                        variant="custom"
                         id="dropdown-basic"
                         className="p-0 custom-toggle"
+
+
                       >
                         <PersonCircle className="fs-5" />
                         <Container className="d-flex flex-row justify-content-center">
@@ -334,11 +337,17 @@ function MyNavbar() {
                   >
                     <Dropdown>
                       <Dropdown.Toggle
-                        variant="link"
+                        variant="custom"
                         id="dropdown-basic"
                         className="p-0 custom-toggle"
+
                       >
-                        <PersonCircle className="fs-5" />
+                        <Image
+                          className="user-avatar"
+                          src={user.photo}
+                          roundedCircle
+                          width="25"
+                        />
                         <Container className="d-flex flex-row justify-content-center">
                           <h6>Tu</h6>
                           <CaretDownFill className="fs-6" />
@@ -349,11 +358,7 @@ function MyNavbar() {
                         <div className="my-3 mx-3">
                           <Row>
                             <Col xs={"auto"} className="pe-0">
-                              <Image
-                                className="blog-author"
-                                src={user.photo}
-                                roundedCircle
-                              />
+
                             </Col>
                             <Col className="d-flex align-items-center">
                               <h6 className="mt-2">

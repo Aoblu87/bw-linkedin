@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.scss";
+import Home from "./components/Home";
 import Main from "./components/Main";
 import SpecificProfileViewer from "./components/SpecificProfileViewer";
 
@@ -9,8 +10,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {<Route path="/" element={<Main />}></Route>}
-        {<Route path="/:id" element={<SpecificProfileViewer />} />}
+        {<Route path="/" element={<Home />}></Route>}
+        {<Route path="/:id" element={<Main />} />}
         {
           <Route
             path="/:SpecificProfile/:id"

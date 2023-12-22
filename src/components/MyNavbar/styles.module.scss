@@ -3,5 +3,10 @@ h6 {
     font-size: 10px;
 }
 
+.btn-custom {
+    color: #5C5D5D;
+}
 
-
+.dropdown-toggle::after {
+    display: none;
+}
