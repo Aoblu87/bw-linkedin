@@ -18,14 +18,11 @@ export default function Sidebar() {
     const getProfiles = async () => {
       setIsLoading(true);
       try {
-        let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/profile/",
-          {
-            headers: {
-              Authorization: process.env.REACT_APP_MY_TOKEN,
-            },
-          }
-        );
+        let response = await fetch("http://localhost:3025/api/profiles", {
+          headers: {
+            Authorization: process.env.REACT_APP_MY_TOKEN,
+          },
+        });
         console.log(response);
         if (response.ok) {
           let profilo = await response.json();
