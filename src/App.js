@@ -10,14 +10,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {<Route path="/" element={<Home />}></Route>}
-        {<Route path="/:id" element={<Main />} />}
-        {
-          <Route
-            path="/:SpecificProfile/:id"
-            element={<SpecificProfileViewer />}
-          />
-        }
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/:id" element={<Main />} />
+
+        <Route
+          path="/:SpecificProfile/:id"
+          element={<SpecificProfileViewer />}
+        />
       </Routes>
     </BrowserRouter>
   );
