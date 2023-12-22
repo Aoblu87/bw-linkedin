@@ -1,16 +1,22 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.scss";
-import Home from "./components/Home";
 import Main from "./components/Main";
 import SpecificProfileViewer from "./components/SpecificProfileViewer";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Welcome from "./components/Welcome";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState(null);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/:id" element={<Main />} />
+        <Route
+          path="/"
+          element={<Welcome user={user} setUser={setUser} />}
+        ></Route>
+        <Route path="/:id" element={<Main user={user} setUser={setUser} />} />
 
         <Route
           path="/:SpecificProfile/:id"

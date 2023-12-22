@@ -3,12 +3,13 @@ import { Container, Row } from "react-bootstrap";
 import Footer from "./Footer/Footer";
 import Homepage from "./Homepage/Homepage";
 
-function Main() {
+function Welcome(props) {
+  const { user, setUser } = props;
   return (
     <>
       <Container className="mt-5">
         <Row className="g-0 p-5">
-          <Homepage />
+          <Homepage user={user} setUser={setUser} />
         </Row>
         <Footer />
       </Container>
@@ -16,4 +17,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default Welcome;
