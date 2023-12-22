@@ -1,37 +1,48 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Image } from "react-bootstrap";
 import { Dot, PersonPlusFill } from "react-bootstrap-icons";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { useNavigate } from "react-router-dom";
 import AddExperience from "../AddExperience/AddExperience";
 import Experience from "../Experience/Experience";
 import Foto from "../Foto";
-import { useParams } from "react-router-dom";
 
 export default function Profile() {
-  const [profile, setProfile] = useState();
-
   const [experiences, setExperiences] = useState();
-  const { id } = useParams();
+  //Dati dell'utente loggato
+  const [user, setUser] = useState();
+  //Memorizzo se l'utente sia loggato o meno
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const getUserData = useCallback(() => {
-    try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profiles/${id}`, {
-        headers: {
-          Authorization: process.env.REACT_APP_MY_TOKEN,
-        },
-      })
-        .then((r) => r.json())
-        .then(setProfile);
-      console.log(setProfile);
-    } catch (error) {
-      console.log(error);
-    }
-  }, [id]);
+  const navigate = useNavigate();
 
+  //Controllo nel local storage se sono presneti token e userId
+  const storedUserId = localStorage.getItem("userId");
+  const storedToken = localStorage.getItem("token");
+
+  // Controllo al render del componente che l'utente abbia ancora un token valido altrimenti lo rimando alla pagina del login
   useEffect(() => {
-    getUserData();
-  }, [getUserData]);
+    fetch(`http://localhost:3025/api/profiles/${storedUserId}`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setUser(data);
+        // setIsLoggedIn(true);
+      })
+      .catch(() => {
+        // Se la chiamata API fallisce reindirizzo l'utente alla pagina di login
+        navigate("/");
+      });
+  }, [storedToken, storedUserId, navigate]);
+
+  console.log(user);
 
   return (
     <Col className="col-md-8 d-flex flex-column">
@@ -44,32 +55,47 @@ export default function Profile() {
             color: "green",
             width: "100%",
           }}
-        ></div>
+        >
+          <Image
+            className="img-fluid"
+            src={user?.cover}
+            style={{
+              height: "13.5rem",
+
+              width: "100%",
+            }}
+          ></Image>
+        </div>
         <div
           className="rounded-circle  position-absolute"
-          fluid
           style={{
             width: "20%",
 
             inset: "110px 0 0 25px",
           }}
         >
-          <Image src={profile?.image} alt="Profile user" fluid roundedCircle className="img-fluid" style={{
-            height: "140px",
-            width: "140px",
-            objectFit: "cover",
-          }} />
+          <Image
+            src={user?.photo}
+            alt="Profile user"
+            roundedCircle
+            className="img-fluid"
+            style={{
+              height: "140px",
+              width: "140px",
+              objectFit: "cover",
+            }}
+          />
         </div>
-        <Foto profile={profile} setProfile={setProfile} />
+        <Foto user={user} setUser={setUser} />
         <Card.Body className="d-flex flex-row p-4">
           <Col>
             <Card.Title className="d-flex flex-row">
-              <h4 className="fw-bolder mt-5 me-2">{profile?.name}</h4>
-              <h4 className="fw-bolder mt-5">{profile?.surname}</h4>
+              <h4 className="fw-bolder mt-5 me-2">{user?.firstName}</h4>
+              <h4 className="fw-bolder mt-5">{user?.lastName}</h4>
             </Card.Title>
-            <Card.Subtitle>{profile?.title} - Università di Pisa</Card.Subtitle>
+            <Card.Subtitle>{user?.title} </Card.Subtitle>
             <Card.Text className="fs-6  text-secondary mt-2 ">
-              {profile?.area}
+              {user?.city}, <span className="">{user?.country}</span>
               <Dot />
               <Card.Link className="fw-bolder text-decoration-none ">
                 Informazioni di contatto
@@ -109,21 +135,21 @@ export default function Profile() {
             <Card.Title>
               <h4 className="fw-bolder mt-2">Esperienza</h4>
             </Card.Title>
-            {profile && (
+            {user && (
               <AddExperience
-                profile={profile}
+                user={user}
                 setExperiences={setExperiences}
                 experiences={experiences}
               />
             )}
           </div>
-          {profile && (
+          {/* {user && (
             <Experience
-              profile={profile}
+              user={user}
               setExperiences={setExperiences}
               experiences={experiences}
             />
-          )}
+          )} */}
         </Card.Body>
       </Card>
     </Col>

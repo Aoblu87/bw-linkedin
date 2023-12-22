@@ -3,24 +3,26 @@ import { Button, Form } from "react-bootstrap";
 import { CameraFill } from "react-bootstrap-icons";
 import Modal from "react-bootstrap/Modal";
 
-export default function Foto({ profile, setProfile }) {
+export default function Foto({ setUser }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const storedUserId = localStorage.getItem("userId");
+  const storedToken = localStorage.getItem("token");
   const [fd, setFd] = useState(new FormData()); //FormData e' una classe usata per raccogliere dati non stringa dai form
   //E' formata da coppie chiave/valore => ["post", File], ["exp", File]
   const handleSubmit = async (ev) => {
     ev.preventDefault();
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${profile._id}/picture`,
+        `http://localhost:3025/api/profiles/${storedUserId}/photo`,
         {
           //qui l'id andra' sostituito con un id DINAMICO!!!!!
           method: "POST",
           body: fd, //non serve JSON.stringify
           headers: {
             //NON serve ContentType :)
-            Authorization: process.env.REACT_APP_MY_TOKEN,
+            Authorization: storedToken,
           },
         }
       );
@@ -37,18 +39,14 @@ export default function Foto({ profile, setProfile }) {
 
   useEffect(() => {
     try {
-      fetch(`https://striveschool-api.herokuapp.com/api/profile/me`, {
-        headers: {
-          Authorization: process.env.REACT_APP_MY_TOKEN,
-        },
-      })
+      fetch(`http://localhost:3025/api/profiles/me`)
         .then((r) => r.json())
-        .then(setProfile);
-      console.log(setProfile);
+        .then(setUser);
+      console.log(setUser);
     } catch (error) {
       console.log(error);
     }
-  }, [setProfile]);
+  }, [setUser]);
 
   const handleFile = (e) => {
     setFd((prev) => {
